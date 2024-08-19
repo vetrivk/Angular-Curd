@@ -1,0 +1,62 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-6 p-2">
+      <form [formGroup]="EmployeeFormGroup" (ngSubmit)="onSubmit()">
+        <div>
+          <label>Name</label>
+          <input formControlName="name" class="form-control mb-2" type="text" />
+        </div>
+        <div>
+          <label>Email</label>
+          <input
+            formControlName="email"
+            class="form-control mb-2"
+            type="text"
+          />
+        </div>
+        <div>
+          <label>Phone</label>
+          <input
+            formControlName="phone"
+            class="form-control mb-2"
+            type="text"
+          />
+        </div>
+        <div>
+          <button *ngIf="isUpdateMode" class="btn btn-primary">Update</button>
+          <button *ngIf="!isUpdateMode" class="btn btn-primary">Create</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-6 p-2">
+      <div *ngIf="EmployeeView.length == 0" class="alert alert-info">
+        Data Not Available
+      </div>
+      <table class="table" *ngIf="EmployeeView.length > 0">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let emp of EmployeeView">
+            <td>{{ emp.name }}</td>
+            <td>{{ emp.email }}</td>
+            <td>{{ emp.phone }}</td>
+            <td>
+              <button (click)="fillFrom(emp)" class="btn link-primary">
+                Edit
+              </button>
+              <button (click)="deleteView(emp.id)" class="btn link-danger">
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
